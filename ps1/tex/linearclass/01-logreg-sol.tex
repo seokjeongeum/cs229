@@ -1,3 +1,14 @@
 \begin{answer}
-test
+\begin{eqnarray*}
+H&=&\nabla^2J(\theta)\\
+&=&\nabla_\theta^2\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}\log(h_{\theta}(x^{(i)}))+(1-y^{(i)})\log(1-h_{\theta}(x^{(i)}))\right)\right)\\
+&=&\nabla_\theta^2\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}\log(g(\theta^T x^{(i)}))+(1-y^{(i)})\log(1-g(\theta^T x^{(i)}))\right)\right)\\
+&=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}\frac{x^{(i)}g'(\theta^T x^{(i)})}{g(\theta^T x^{(i)})}+(y^{(i)}-1)\frac{x^{(i)}g'(\theta^T x^{(i)})}{1-g(\theta^T x^{(i)})}\right)\right)\\
+&=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}\frac{x^{(i)}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))}{g(\theta^T x^{(i)})}+(y^{(i)}-1)\frac{x^{(i)}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))}{1-g(\theta^T x^{(i)})}\right)\right)\\
+&=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}(1-g(\theta^T x^{(i)}))+(y^{(i)}-1)x^{(i)}g(\theta^T x^{(i)})\right)\right)\\
+&=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}-y^{(i)}x^{(i)}g(\theta^T x^{(i)})+y^{(i)}x^{(i)}g(\theta^T x^{(i)})-x^{(i)}g(\theta^T x^{(i)})\right)\right)\\
+&=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}-x^{(i)}g(\theta^T x^{(i)})\right)\right)\\
+&=&-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}-x^{(i)^2}g'(\theta^T x^{(i)})\right)\\
+&=&-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}-x^{(i)^2}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))\right)\\
+\end{eqnarray*}
 \end{answer}
