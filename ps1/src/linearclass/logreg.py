@@ -16,6 +16,10 @@ def main(train_path, valid_path, save_path):
     # Train a logistic regression classifier
     # Plot decision boundary on top of validation set set
     # Use np.savetxt to save predictions on eval set to save_path
+    x_eval, y_eval = util.load_dataset(valid_path, add_intercept=True)
+    clf = LogisticRegression()
+    clf.fit(x_train, y_train)
+    np.savetxt(save_path, clf.predict(x_eval))
     # *** END CODE HERE ***
 
 
@@ -27,6 +31,7 @@ class LogisticRegression:
         > clf.fit(x_train, y_train)
         > clf.predict(x_eval)
     """
+
     def __init__(self, step_size=0.01, max_iter=1000000, eps=1e-5,
                  theta_0=None, verbose=True):
         """
@@ -51,6 +56,15 @@ class LogisticRegression:
             y: Training example labels. Shape (n_examples,).
         """
         # *** START CODE HERE ***
+        if self.theta is None:
+            self.theta = np.zeros(x.shape[1])
+        for i in range(self.max_iter):
+            old_theta = self.theta
+            self.theta -= self.j(x, y) / self.j_prime(x, y)
+            if self.verbose:
+                print(f'Step {i}: {self.j(x, y)}')
+            if (abs(self.theta - old_theta)).sum() < self.eps:
+                break
         # *** END CODE HERE ***
 
     def predict(self, x):
@@ -64,6 +78,24 @@ class LogisticRegression:
         """
         # *** START CODE HERE ***
         # *** END CODE HERE ***
+
+    def j(self, x, y):
+        n = x.shape[0]
+        summation = 0
+        for i in range(n):
+            summation += y[i] * np.log(self.h(x[i])) + (1 - y[i]) * np.log(1 - self.h(x[i]))
+        return -1 / n * summation
+
+    def j_prime(self, x, y):
+        n = x.shape[0]
+        summation = 0
+        for i in range(n):
+            summation += y[i] * x[i] - x[i] * self.h(x[i])
+        return -1 / n * summation
+
+    def h(self, x):
+        return 1 / (1 + np.exp(self.theta.transpose() * x))
+
 
 if __name__ == '__main__':
     main(train_path='ds1_train.csv',
