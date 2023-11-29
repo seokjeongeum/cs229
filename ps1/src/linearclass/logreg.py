@@ -1,4 +1,6 @@
 import numpy as np
+from matplotlib import pyplot as plt
+
 import util
 
 
@@ -19,7 +21,13 @@ def main(train_path, valid_path, save_path):
     x_eval, y_eval = util.load_dataset(valid_path, add_intercept=True)
     clf = LogisticRegression()
     clf.fit(x_train, y_train)
-    np.savetxt(save_path, clf.predict(x_eval))
+    predictions = clf.predict(x_eval)
+    np.savetxt(save_path, predictions)
+    fig, ax = plt.subplots()
+    ax.scatter(x_eval[:, 1][predictions <= 0.5], x_eval[:, 2][predictions <= 0.5], marker='o')
+    ax.scatter(x_eval[:, 1][predictions >= 0.5], x_eval[:, 2][predictions >= 0.5], marker='v')
+    ax.plot(np.arange(-10.0, 10.0, 0.1))
+    plt.show()
     # *** END CODE HERE ***
 
 
@@ -59,11 +67,11 @@ class LogisticRegression:
         if self.theta is None:
             self.theta = np.zeros(x.shape[1])
         for i in range(self.max_iter):
-            old_theta = self.theta
+            old_theta = self.theta.copy()
             self.theta -= self.j(x, y) / self.j_prime(x, y)
             if self.verbose:
-                print(f'Step {i}: {self.j(x, y)}')
-            if (abs(self.theta - old_theta)).sum() < self.eps:
+                print(f'Step {i + 1}: {self.j(x, y)}')
+            if sum(abs(self.theta - old_theta)) < self.eps:
                 break
         # *** END CODE HERE ***
 
@@ -77,24 +85,17 @@ class LogisticRegression:
             Outputs of shape (n_examples,).
         """
         # *** START CODE HERE ***
+        return np.dot(self.theta, x.transpose())
         # *** END CODE HERE ***
 
     def j(self, x, y):
-        n = x.shape[0]
-        summation = 0
-        for i in range(n):
-            summation += y[i] * np.log(self.h(x[i])) + (1 - y[i]) * np.log(1 - self.h(x[i]))
-        return -1 / n * summation
+        return -1 / x.shape[0] * sum(y * np.log(self.h(x)) + (1 - y) * np.log(1 - self.h(x)))
 
     def j_prime(self, x, y):
-        n = x.shape[0]
-        summation = 0
-        for i in range(n):
-            summation += y[i] * x[i] - x[i] * self.h(x[i])
-        return -1 / n * summation
+        return -1 / x.shape[0] * sum((y * x.transpose() - self.h(x) * x.transpose()).transpose())
 
     def h(self, x):
-        return 1 / (1 + np.exp(self.theta.transpose() * x))
+        return 1 / (1 + np.exp(np.dot(self.theta, x.transpose())))
 
 
 if __name__ == '__main__':
