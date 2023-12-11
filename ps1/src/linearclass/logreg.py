@@ -1,5 +1,6 @@
+import os
+
 import numpy as np
-from matplotlib import pyplot as plt
 
 import util
 
@@ -21,13 +22,8 @@ def main(train_path, valid_path, save_path):
     x_eval, y_eval = util.load_dataset(valid_path, add_intercept=True)
     clf = LogisticRegression()
     clf.fit(x_train, y_train)
-    predictions = clf.predict(x_eval)
-    np.savetxt(save_path, predictions)
-    fig, ax = plt.subplots()
-    ax.scatter(x_eval[:, 1][predictions <= 0.5], x_eval[:, 2][predictions <= 0.5], marker='o')
-    ax.scatter(x_eval[:, 1][predictions >= 0.5], x_eval[:, 2][predictions >= 0.5], marker='v')
-    ax.plot(np.arange(-10.0, 10.0, 0.1))
-    plt.show()
+    np.savetxt(save_path, clf.predict(x_eval))
+    util.plot(x_eval, y_eval, clf.theta, f'{os.path.splitext(save_path)[0]}.png')
     # *** END CODE HERE ***
 
 
@@ -68,9 +64,9 @@ class LogisticRegression:
             self.theta = np.zeros(x.shape[1])
         for i in range(self.max_iter):
             old_theta = self.theta.copy()
-            self.theta -= self.j(x, y) / self.j_prime(x, y)
+            self.theta -= np.linalg.inv(self.hessian(x)) @ self.gradient(x, y)
             if self.verbose:
-                print(f'Step {i + 1}: {self.j(x, y)}')
+                print(f'Step {i + 1}: {self.loss(x, y)}')
             if sum(abs(self.theta - old_theta)) < self.eps:
                 break
         # *** END CODE HERE ***
@@ -85,17 +81,17 @@ class LogisticRegression:
             Outputs of shape (n_examples,).
         """
         # *** START CODE HERE ***
-        return np.dot(self.theta, x.transpose())
+        return 1 / (1 + np.exp(self.theta @ x.transpose()))
         # *** END CODE HERE ***
 
-    def j(self, x, y):
-        return -1 / x.shape[0] * sum(y * np.log(self.h(x)) + (1 - y) * np.log(1 - self.h(x)))
+    def loss(self, x, y):
+        return -1 / x.shape[0] * y @ np.log(self.predict(x)) + (1 - y) @ np.log(1 - self.predict(x))
 
-    def j_prime(self, x, y):
-        return -1 / x.shape[0] * sum((y * x.transpose() - self.h(x) * x.transpose()).transpose())
+    def gradient(self, x, y):
+        return 1 / x.shape[0] * (self.predict(x) @ x - y @ x)
 
-    def h(self, x):
-        return 1 / (1 + np.exp(np.dot(self.theta, x.transpose())))
+    def hessian(self, x):
+        return 1 / x.shape[0] * self.predict(x) @ (1 - self.predict(x)) - x.transpose() @ x
 
 
 if __name__ == '__main__':
