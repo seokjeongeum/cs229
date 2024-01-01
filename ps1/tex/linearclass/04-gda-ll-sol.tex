@@ -1,2 +1,20 @@
 \begin{answer}
+  \begin{eqnarray*}
+\ell(\phi, \mu_{0}, \mu_1, \Sigma) &=& \log \prod_{i=1}^\nexp p(x^{(i)} , y^{(i)};\phi, \mu_{0}, \mu_1, \Sigma) \\
+&=& \log \prod_{i=1}^\nexp p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) p(y^{(i)};\phi) \\
+&=& \sum_{i=1}^\nexp \log ( p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) ) + \sum_{i=1}^\nexp \log ( p(y^{(i)};\phi) )
+  \end{eqnarray*}
+  \begin{eqnarray*}
+\frac{\partial\ell}{\partial\phi}=\frac{\partial}{\partial\phi}\sum_{i=1}^\nexp \log ( p(y^{(i)};\phi) )\\
+=\frac{\partial}{\partial\phi}\sum_{i=1}^\nexp \log (\phi^{y^{(i)}} (1-\phi)^{(1-y^{(i)})} )\\
+=\frac{\partial}{\partial\phi}\sum_{i=1}^\nexp \left( y^{(i)}\log \phi+(1-y^{(i)})\log (1-\phi) ) \right)\\
+=\sum_{i=1}^\nexp \left( \frac{y^{(i)}}{\phi}-\frac{(1-y^{(i)})}{(1-\phi)}  \right)\\
+=\sum_{i=1}^\nexp \left( (1-\phi)y^{(i)}-\phi(1-y^{(i)})  \right)\\
+=\sum_{i=1}^\nexp \left( y^{(i)}-\phi y^{(i)}-\phi+\phi y^{(i)}  \right)\\
+=\sum_{i=1}^\nexp \left( y^{(i)}-\phi \right)\\
+=\sum_{i=1}^\nexp y^{(i)}-\nexp\phi=0
+  \end{eqnarray*}
+  \begin{eqnarray*}
+\phi=\frac{1}{\nexp}\sum_{i=1}^\nexp y^{(i)}=\frac{1}{\nexp} \sum_{i=1}^\nexp 1\{y^{(i)} = 1\}
+  \end{eqnarray*}
 \end{answer}

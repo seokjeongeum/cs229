@@ -10,11 +10,11 @@ H&=&\nabla^2J(\theta)\\
 &=&\nabla_\theta\left(-\frac{1}{\nexp}\sum_{i=1}^\nexp\left(y^{(i)}x^{(i)}-g(\theta^T x^{(i)})x^{(i)}\right)\right)\\
 &=&\nabla_\theta\left(\frac{1}{\nexp}\sum_{i=1}^\nexp\left(g(\theta^T x^{(i)})x^{(i)}-y^{(i)}x^{(i)}\right)\right)\\
 &=&\frac{1}{\nexp}\sum_{i=1}^{\nexp}g'(\theta^T x^{(i)})x^{(i)}x^{(i)T}\\
-&=&\frac{1}{\nexp}\sum_{i=1}^{\nexp}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))x^{(i)}x^{(i)T}\\
+&=&\frac{1}{\nexp}\sum_{i=1}^{\nexp}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))x^{(i)}x^{(i)T}
 \end{eqnarray*}
 \begin{eqnarray*}
 z^THz&=&z^T\frac{1}{\nexp}\sum_{i=1}^\nexp\left(g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))x^{(i)}x^{(i)T}\right)z\\
 &=&\frac{1}{\nexp}\sum_{i=1}^{\nexp}g(\theta^T x^{(i)})(1-g(\theta^T x^{(i)}))z^{(i)T}x^{(i)}x^{(i)T}z^{(i)}\\
-&=&\frac{1}{\nexp}g(\theta^T x)(1-g(\theta^T x))(x^{T}z)^2\geq0\\
+&=&\frac{1}{\nexp}g(\theta^T x)(1-g(\theta^T x))(x^{T}z)^2\geq0
 \end{eqnarray*}
 \end{answer}
