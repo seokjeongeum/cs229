@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import util
 
@@ -17,6 +19,11 @@ def main(train_path, valid_path, save_path):
     # Train a GDA classifier
     # Plot decision boundary on validation set
     # Use np.savetxt to save outputs from validation set to save_path
+    x_eval, y_eval = util.load_dataset(valid_path, add_intercept=False)
+    clf = GDA()
+    clf.fit(x_train, y_train)
+    np.savetxt(save_path, clf.predict(x_eval))
+    util.plot(x_eval, y_eval, clf.theta, f'{os.path.splitext(save_path)[0]}.png')
     # *** END CODE HERE ***
 
 
@@ -28,6 +35,7 @@ class GDA:
         > clf.fit(x_train, y_train)
         > clf.predict(x_eval)
     """
+
     def __init__(self, step_size=0.01, max_iter=10000, eps=1e-5,
                  theta_0=None, verbose=True):
         """
@@ -55,6 +63,17 @@ class GDA:
         # *** START CODE HERE ***
         # Find phi, mu_0, mu_1, and sigma
         # Write theta in terms of the parameters
+        n = x.shape[0]
+        phi = y.sum() / n
+        mu_0 = x[y == 0].sum(axis=0) / (y == 0).sum()
+        mu_1 = x[y == 1].sum(axis=0) / (y == 1).sum()
+        array0 = (x - mu_0)[y == 0]
+        array1 = (x - mu_1)[y == 1]
+        sigma = (array0.T @ array0 + array1.T @ array1) / n
+        sigma_inverse = np.linalg.inv(sigma)
+        self.theta = np.zeros(x.shape[1] + 1)
+        self.theta[0] = -(mu_1 @ sigma_inverse @ mu_1 - mu_0 @ sigma_inverse @ mu_0 + np.log((1 - phi) / phi))
+        self.theta[1:] = -(mu_0 - mu_1) @ sigma_inverse
         # *** END CODE HERE ***
 
     def predict(self, x):
@@ -67,7 +86,9 @@ class GDA:
             Outputs of shape (n_examples,).
         """
         # *** START CODE HERE ***
+        return 1 / (1 + np.exp(-(self.theta @ util.add_intercept(x).T)))
         # *** END CODE HERE
+
 
 if __name__ == '__main__':
     main(train_path='ds1_train.csv',
