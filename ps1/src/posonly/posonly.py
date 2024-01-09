@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import util
 import sys
@@ -33,14 +35,29 @@ def main(train_path, valid_path, test_path, save_path):
     # *** START CODE HERE ***
     # Part (a): Train and test on true labels
     # Make sure to save predicted probabilities to output_path_true using np.savetxt()
+    x_train, t_train = util.load_dataset(
+        train_path,
+        label_col='t',
+        add_intercept=True
+    )
+    x_test, t_test = util.load_dataset(
+        test_path,
+        label_col='t',
+        add_intercept=True
+    )
+    clf = LogisticRegression()
+    clf.fit(x_train, t_train)
+    np.savetxt(output_path_true, clf.predict(x_test))
+    util.plot(x_test, t_test, clf.theta, f'{os.path.splitext(output_path_true)[0]}.png')
     # Part (b): Train on y-labels and test on true labels
     # Make sure to save predicted probabilities to output_path_naive using np.savetxt()
     # Part (f): Apply correction factor using validation set and test on true labels
     # Plot and use np.savetxt to save outputs to output_path_adjusted
     # *** END CODER HERE
 
+
 if __name__ == '__main__':
     main(train_path='train.csv',
-        valid_path='valid.csv',
-        test_path='test.csv',
-        save_path='posonly_X_pred.txt')
+         valid_path='valid.csv',
+         test_path='test.csv',
+         save_path='posonly_X_pred.txt')
