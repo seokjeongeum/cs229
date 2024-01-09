@@ -55,8 +55,9 @@ def main(train_path, valid_path, test_path, save_path):
         train_path,
         add_intercept=True
     )
-    x_test, y_test = util.load_dataset(
+    x_test, t_test = util.load_dataset(
         test_path,
+        label_col='t',
         add_intercept=True
     )
     clf = LogisticRegression()
