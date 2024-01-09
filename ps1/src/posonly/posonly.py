@@ -51,6 +51,18 @@ def main(train_path, valid_path, test_path, save_path):
     util.plot(x_test, t_test, clf.theta, f'{os.path.splitext(output_path_true)[0]}.png')
     # Part (b): Train on y-labels and test on true labels
     # Make sure to save predicted probabilities to output_path_naive using np.savetxt()
+    x_train, y_train = util.load_dataset(
+        train_path,
+        add_intercept=True
+    )
+    x_test, y_test = util.load_dataset(
+        test_path,
+        add_intercept=True
+    )
+    clf = LogisticRegression()
+    clf.fit(x_train, y_train)
+    np.savetxt(output_path_naive, clf.predict(x_test))
+    util.plot(x_test, t_test, clf.theta, f'{os.path.splitext(output_path_naive)[0]}.png')
     # Part (f): Apply correction factor using validation set and test on true labels
     # Plot and use np.savetxt to save outputs to output_path_adjusted
     # *** END CODER HERE
