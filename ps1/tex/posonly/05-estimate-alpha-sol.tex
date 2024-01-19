@@ -1,2 +1,19 @@
 \begin{answer}
+\begin{eqnarray*}
+h(x^{(i)})=p(y^{(i)}=1\mid x^{(i)})\\
+=p(y^{(i)}=1\mid t^{(i)}=0,x^{(i)})\cdot p(t^{(i)}=0,x^{(i)})+p(y^{(i)}=1\mid t^{(i)}=1,x^{(i)})\cdot p(t^{(i)}=1,x^{(i)})\\
+=\alpha\cdot p(t^{(i)}=1,x^{(i)})
+\end{eqnarray*}
+When $y^{(i)}=1$,
+\begin{eqnarray*}
+h(x^{(i)})=\alpha\cdot p(t^{(i)}=1\mid y^{(i)}=1,x^{(i)})\\
+=\alpha
+\end{eqnarray*}
+When $y^{(i)}=0$,
+\begin{eqnarray*}
+h(x^{(i)})=\alpha\cdot p(t^{(i)}=1\mid y^{(i)}=0,x^{(i)})=\alpha\\
+=\alpha\cdot\frac{p(t^{(i)}=1 \cap y^{(i)}=0,x^{(i)})}{p(y^{(i)}=0,x^{(i)})}\\
+=\alpha\cdot\frac{0}{p(y^{(i)}=0,x^{(i)})}\\
+=0
+\end{eqnarray*}
 \end{answer}
