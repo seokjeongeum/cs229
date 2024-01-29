@@ -1,2 +1,13 @@
 \begin{answer}
+\begin{eqnarray*}
+\frac{\partial}{\partial\theta_{j}}\left(\log p(y^{(i)} | x^{(i)}; \theta)\right)=\frac{\partial}{\partial\theta_{j}}\left(\log\left(\frac{1}{y^{(i)}!}\cdot\exp\left((\theta^{T}x^{(i)})^{T}y^{(i)}-e^{\theta^{T}x^{(i)}}\right)\right)\right)\\
+=\frac{\partial}{\partial\theta_{j}}\left((\theta^{T}x^{(i)})^{T}y^{(i)}-e^{\theta^{T}x^{(i)}}-\log(y^{(i)}!)\right)\\
+=\frac{\partial}{\partial\theta_{j}}\left(\left(\sum_{k}\theta_{k}x_{k}^{(i)}\right)y^{(i)}-e^{\sum_{k}\theta_{k}x_{k}^{(i)}}\right)\\
+=x_{j}^{(i)}y^{(i)}-x_{j}^{(i)}\cdot e^{\sum_{k}\theta_{k}x_{k}^{(i)}}\\
+=x_{j}^{(i)}(y^{(i)}-e^{\theta^{T}x^{(i)}}) 
+\end{eqnarray*}
+\begin{eqnarray*}
+\theta_{j}:=\theta_{j}+\alpha\frac{\partial}{\partial\theta_{j}}l(\theta)\\
+=\theta_{j}+\alpha\cdot x_{j}^{(i)}(y^{(i)}-e^{\theta^{T}x^{(i)}}) 
+\end{eqnarray*}
 \end{answer}

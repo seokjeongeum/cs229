@@ -1,6 +1,9 @@
+import os
+
 import numpy as np
 import util
 import matplotlib.pyplot as plt
+
 
 def main(lr, train_path, eval_path, save_path):
     """Problem: Poisson regression with gradient ascent.
@@ -17,6 +20,12 @@ def main(lr, train_path, eval_path, save_path):
     # *** START CODE HERE ***
     # Fit a Poisson Regression model
     # Run on the validation set, and use np.savetxt to save outputs to save_path
+    x_eval, y_eval = util.load_dataset(eval_path, add_intercept=True)
+    clf = PoissonRegression(step_size=lr)
+    clf.fit(x_train, y_train)
+    np.savetxt(save_path, clf.predict(x_eval))
+    plt.scatter(y_eval, clf.predict(x_eval))
+    plt.savefig(f'{os.path.splitext(save_path)[0]}.png')
     # *** END CODE HERE ***
 
 
@@ -53,6 +62,15 @@ class PoissonRegression:
             y: Training example labels. Shape (n_examples,).
         """
         # *** START CODE HERE ***
+        if self.theta is None:
+            self.theta = np.zeros(x.shape[1])
+        for i in range(self.max_iter):
+            old_theta = self.theta.copy()
+            self.theta += self.step_size * x.T @ (y - self.predict(x))
+            if self.verbose:
+                print(f'Step {i + 1}: {((y - self.predict(x)) ** 2).mean()}')
+            if sum(abs(self.theta - old_theta)) < self.eps:
+                break
         # *** END CODE HERE ***
 
     def predict(self, x):
@@ -65,10 +83,12 @@ class PoissonRegression:
             Floating-point prediction for each input, shape (n_examples,).
         """
         # *** START CODE HERE ***
+        return np.exp(self.theta @ x.T)
         # *** END CODE HERE ***
+
 
 if __name__ == '__main__':
     main(lr=1e-5,
-        train_path='train.csv',
-        eval_path='valid.csv',
-        save_path='poisson_pred.txt')
+         train_path='train.csv',
+         eval_path='valid.csv',
+         save_path='poisson_pred.txt')
