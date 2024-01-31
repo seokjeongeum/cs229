@@ -1,2 +1,18 @@
 \begin{answer}
+\begin{eqnarray*}
+\ell(\theta)=p(y|x;\theta)-y\\
+=b(y)\exp(\theta^Txy-a(\theta^Tx))-y
+\end{eqnarray*}
+\begin{eqnarray*}
+-\log\left(p(y|x;\theta)\right)=-\log\left(b(y)\exp(\theta^Txy-a(\theta^Tx))\right)\\
+=-\log(b(y))+\theta^Txy-a(\theta^Tx)
+\end{eqnarray*}
+\begin{eqnarray*}
+\frac{\partial^2}{\partial\theta^2}\ell(\theta)=\frac{\partial^2}{\partial\theta^2}\left(b(y)\exp(\theta^Txy-a(\theta^Tx))-y\right)\\
+=\frac{\partial}{\partial\theta}\left(\left(xy-x\frac{\partial}{\partial\theta}a(\theta^Tx)\right)b(y)\exp(\theta^Txy-a(\theta^Tx))\right)\\
+=\frac{\partial}{\partial\theta}\left(\left(y-\frac{\partial}{\partial\theta}a(\theta^Tx)\right)xb(y)\exp(\theta^Txy-a(\theta^Tx))\right)\\
+=\frac{\partial^2}{\partial\theta^2}a(\theta^Tx)x^2b(y)\exp(\theta^Txy-a(\theta^Tx))+\left(y-\frac{\partial}{\partial\theta}a(\theta^Tx)\right)^2x^2b(y)\exp(\theta^Txy-a(\theta^Tx))\\
+=\frac{\partial^2}{\partial\eta^2}a(\eta)p(y;\eta)+\left(y-\frac{\partial}{\partial\eta}a(\eta)\right)^2p(y;\eta)\\
+=Var[Y; \eta]p(y;\eta)+\left(y-\mathbb{E}[Y; \eta]\right)^2p(y;\eta)\geq0
+\end{eqnarray*}
 \end{answer}
