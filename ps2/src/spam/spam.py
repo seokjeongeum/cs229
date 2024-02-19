@@ -103,6 +103,12 @@ def fit_naive_bayes_model(matrix, labels):
     """
 
     # *** START CODE HERE ***
+    return {
+        'spam': np.log((labels == 1).sum() / len(labels)),
+        'ham': np.log((labels == 0).sum() / len(labels)),
+        'given_spam': np.log(sum(matrix[labels == 1]) / (labels == 1).sum()),
+        'given_ham': np.log(sum(matrix[labels == 0]) / (labels == 0).sum()),
+    }
     # *** END CODE HERE ***
 
 
@@ -119,6 +125,8 @@ def predict_from_naive_bayes_model(model, matrix):
     Returns: A numpy array containg the predictions from the model
     """
     # *** START CODE HERE ***
+    return model['spam'] + np.sum(np.multiply(matrix, model['given_spam']), axis=1) > model['ham'] + np.sum(
+        np.multiply(matrix, model['ham']), axis=1)
     # *** END CODE HERE ***
 
 
@@ -135,6 +143,12 @@ def get_top_five_naive_bayes_words(model, dictionary):
     Returns: A list of the top five most indicative words in sorted order with the most indicative first
     """
     # *** START CODE HERE ***
+    inv = {v: k for k, v in dictionary.items()}
+    return sorted(
+        {inv[i]: x for (i, x) in enumerate(model['given_spam'])}.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    )[:5]
     # *** END CODE HERE ***
 
 
@@ -154,7 +168,14 @@ def compute_best_svm_radius(train_matrix, train_labels, val_matrix, val_labels, 
     Returns:
         The best radius which maximizes SVM accuracy.
     """
+
     # *** START CODE HERE ***
+    def f(optimal_radius):
+        svm_predictions = svm.train_and_predict_svm(train_matrix, train_labels, val_matrix, optimal_radius)
+        svm_accuracy = np.mean(svm_predictions == val_labels)
+        return (svm_accuracy, optimal_radius)
+
+    return sorted(map(f, radius_to_consider), reverse=True)[0][1]
     # *** END CODE HERE ***
 
 
