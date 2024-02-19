@@ -21,6 +21,7 @@ def get_words(message):
     """
 
     # *** START CODE HERE ***
+    return list(map(lambda s: s.lower(), message.split()))
     # *** END CODE HERE ***
 
 
@@ -41,6 +42,15 @@ def create_dictionary(messages):
     """
 
     # *** START CODE HERE ***
+    dictionary = {}
+    for message in messages:
+        for word in get_words(message):
+            if word in dictionary:
+                dictionary[word] += 1
+            else:
+                dictionary[word] = 1
+    filtered = dict(filter(lambda pair: pair[1] >= 5, dictionary.items()))
+    return dict((x, i) for (i, x) in enumerate(filtered))
     # *** END CODE HERE ***
 
 
@@ -48,8 +58,8 @@ def transform_text(messages, word_dictionary):
     """Transform a list of text messages into a numpy array for further processing.
 
     This function should create a numpy array that contains the number of times each word
-    of the vocabulary appears in each message. 
-    Each row in the resulting array should correspond to each message 
+    of the vocabulary appears in each message.
+    Each row in the resulting array should correspond to each message
     and each column should correspond to a word of the vocabulary.
 
     Use the provided word dictionary to map words to column indices. Ignore words that
@@ -65,6 +75,14 @@ def transform_text(messages, word_dictionary):
         j-th vocabulary word in the i-th message.
     """
     # *** START CODE HERE ***
+    n = len(messages)
+    arr = np.zeros((n, len(word_dictionary)))
+    for i in range(n):
+        message = messages[i]
+        for word in get_words(message):
+            if word in word_dictionary:
+                arr[i][word_dictionary[word]] += 1
+    return arr
     # *** END CODE HERE ***
 
 
@@ -153,7 +171,7 @@ def main():
 
     train_matrix = transform_text(train_messages, dictionary)
 
-    np.savetxt('spam_sample_train_matrix', train_matrix[:100,:])
+    np.savetxt('spam_sample_train_matrix', train_matrix[:100, :])
 
     val_matrix = transform_text(val_messages, dictionary)
     test_matrix = transform_text(test_messages, dictionary)
