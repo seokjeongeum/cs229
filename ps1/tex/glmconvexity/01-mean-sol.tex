@@ -1,14 +1,15 @@
 \begin{answer}
-\begin{eqnarray*}
-\frac{\partial}{\partial \eta} \int p(y;\eta) dy = \int \frac{\partial}{\partial \eta} p(y;\eta) dy\\
-=\int \frac{\partial}{\partial \eta} \left(b(y)\exp(\eta y - a(\eta))\right) dy\\
-=\int\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)\left(b(y)\exp(\eta y - a(\eta))\right) dy\\
-=\int\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta)dy\\
-=\int\left(y\cdot p(y;\eta)-\left(\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta)\right)dy\\
-=\int y\cdot p(y;\eta)dy-\int\left(\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta) dy\\
-=\mathbb{E}[Y; \eta]-\frac{\partial}{\partial \eta}a(\eta) \int p(y;\eta) dy\\
-=\mathbb{E}[Y; \eta]-\frac{\partial}{\partial \eta}a(\eta)=0
-\\
-\mathbb{E}[Y; \eta]=\frac{\partial}{\partial \eta}a(\eta)
-\end{eqnarray*}
+\begin{align*}
+\frac{\partial}{\partial \eta} \int p(y;\eta) dy&= \int \frac{\partial}{\partial \eta} p(y;\eta) dy\\
+&=\int \frac{\partial}{\partial \eta} \left(b(y)\exp(\eta y - a(\eta))\right) dy\\
+&=\int\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)\left(b(y)\exp(\eta y - a(\eta))\right) dy\\
+&=\int\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta)dy\\
+&=\int\left(y\cdot p(y;\eta)-\left(\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta)\right)dy\\
+&=\int y\cdot p(y;\eta)dy-\int\left(\frac{\partial}{\partial \eta}a(\eta)\right)p(y;\eta) dy\\
+&=\mathbb{E}[Y; \eta]-\frac{\partial}{\partial \eta}a(\eta) \int p(y;\eta) dy\\
+&=\mathbb{E}[Y; \eta]-\frac{\partial}{\partial \eta}a(\eta)=0
+\end{align*}
+\begin{align*}
+\mathbb{E}[Y; \eta]&=\frac{\partial}{\partial \eta}a(\eta)
+\end{align*}
 \end{answer}

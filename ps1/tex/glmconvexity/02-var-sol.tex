@@ -1,14 +1,15 @@
 \begin{answer}
-\begin{eqnarray*}
-\frac{\partial^2}{\partial \eta^2} \int p(y;\eta) dy =\frac{\partial}{\partial \eta}\int\frac{\partial}{\partial \eta} p(y;\eta) dy\\
-=\int\frac{\partial}{\partial \eta}\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)\left(b(y)\exp(\eta y - a(\eta))\right) dy\\
-=\int\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)b(y)\exp(\eta y - a(\eta))+\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)^2b(y)\exp(\eta y - a(\eta))dy\\
-=\int\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)p(y;\eta)+\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)^2p(y;\eta)dy\\
-=\int\left(\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)+y^2-2y\frac{\partial}{\partial \eta}a(\eta)+\left(\frac{\partial}{\partial \eta}a(\eta)\right)^2\right)p(y;\eta)dy\\
-=-\frac{\partial^2}{\partial\eta^2}a(\eta)+\mathbb{E}[Y^2; \eta]-2\mathbb{E}[Y; \eta]^2+\mathbb{E}[Y; \eta]^2\\
-=-\frac{\partial^2}{\partial\eta^2}a(\eta)+\mathbb{E}[Y^2; \eta]-\mathbb{E}[Y; \eta]^2\\
-=-\frac{\partial^2}{\partial\eta^2}a(\eta)+Var[Y; \eta]=0
-\\
+\begin{align*}
+\frac{\partial^2}{\partial \eta^2} \int p(y;\eta) dy&=\frac{\partial}{\partial \eta}\int\frac{\partial}{\partial \eta} p(y;\eta) dy\\
+&=\int\frac{\partial}{\partial \eta}\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)\left(b(y)\exp(\eta y - a(\eta))\right) dy\\
+&=\int\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)b(y)\exp(\eta y - a(\eta))+\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)^2b(y)\exp(\eta y - a(\eta))dy\\
+&=\int\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)p(y;\eta)+\left(y-\frac{\partial}{\partial \eta}a(\eta)\right)^2p(y;\eta)dy\\
+&=\int\left(\left(-\frac{\partial^2}{\partial\eta^2}a(\eta)\right)+y^2-2y\frac{\partial}{\partial \eta}a(\eta)+\left(\frac{\partial}{\partial \eta}a(\eta)\right)^2\right)p(y;\eta)dy\\
+&=-\frac{\partial^2}{\partial\eta^2}a(\eta)+\mathbb{E}[Y^2; \eta]-2\mathbb{E}[Y; \eta]^2+\mathbb{E}[Y; \eta]^2\\
+&=-\frac{\partial^2}{\partial\eta^2}a(\eta)+\mathbb{E}[Y^2; \eta]-\mathbb{E}[Y; \eta]^2\\
+&=-\frac{\partial^2}{\partial\eta^2}a(\eta)+Var[Y; \eta]=0
+\end{align*}
+\begin{align*}
 Var[Y; \eta]=\frac{\partial^2}{\partial \eta^2}a(\eta)
-\end{eqnarray*}
+\end{align*}
 \end{answer}
