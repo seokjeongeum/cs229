@@ -1,2 +1,54 @@
 \begin{answer}
+\begin{enumerate}
+\item 
+Is a kernel, because:
+\begin{align*}
+\textbf{y}^TK\textbf{y}&=\textbf{y}^T(K_1+K_2)\textbf{y}\\
+&=\textbf{y}^TK_1\textbf{y}+\textbf{y}^TK_2\textbf{y}
+\end{align*}
+\begin{align*}
+\textbf{y}^TK_1\textbf{y}\geq0,\textbf{y}^TK_2\textbf{y}\geq0\Rightarrow \textbf{y}^TK\textbf{y}=\textbf{y}^TK_1\textbf{y}+\textbf{y}^TK_2\textbf{y}\geq0
+\end{align*}
+\item 
+Not a kernel, counter-example:
+\begin{align*}
+K_1=
+   \begin{bmatrix} 
+   1&0\\ 
+   0&1\\ 
+   \end{bmatrix},
+K_2=
+   \begin{bmatrix} 
+   2&0\\ 
+   0&2\\ 
+   \end{bmatrix}\Rightarrow
+K=
+   \begin{bmatrix} 
+   -1&0\\ 
+   0&-1\\ 
+   \end{bmatrix} \text{Which is not positive semidefinite}
+\end{align*}
+\item 
+Is a kernel, because:
+\begin{align*}
+\textbf{y}^TK\textbf{y}&=\textbf{y}^TaK_1\textbf{y}\\
+&=a\textbf{y}^TK_1\textbf{y}
+\end{align*}
+\begin{align*}
+\textbf{y}^TK_1\textbf{y}\geq0\Rightarrow\textbf{y}^TK\textbf{y}=a\textbf{y}^TK_1\textbf{y}\geq0
+\end{align*}
+\item 
+Not a kernel, because:
+\begin{align*}
+\textbf{y}^TK\textbf{y}&=\textbf{y}^T-aK_1\textbf{y}\\
+&=-a\textbf{y}^TK_1\textbf{y}
+\end{align*}
+\begin{align*}
+\textbf{y}^TK_1\textbf{y}\geq0\Rightarrow\textbf{y}^TK\textbf{y}=-a\textbf{y}^TK_1\textbf{y}\leq0
+\end{align*}
+\item 
+\item 
+\item 
+\item 
+\end{enumerate}
 \end{answer}
