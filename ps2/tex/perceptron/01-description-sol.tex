@@ -1,2 +1,30 @@
 \begin{answer}
+\begin{enumerate}
+\item
+I will represent $\theta^{(i)}$ in terms of low-dimentional  $\beta^{(i)}$.
+\begin{align*}
+\theta^{(i)}=\beta^{(i)}\phi(x^{(i)})
+\end{align*}
+\begin{align*}
+\theta^{(0)}=\vec{0}\Rightarrow\beta^{(0)}=\vec{0}
+\end{align*}
+\item
+\begin{align*}
+h_{\theta^{(i)}}(x^{(i+1)})&= g({\theta^{(i)}}^T \phi(x^{(i+1)}))\\
+&=g(\beta^{(i)}\phi(x^{(i+1)})^T\phi(x^{(i+1)})))\\
+&=g(\beta^{(i)}K(x^{(i+1)},x^{(i+1)})))
+\end{align*}
+I can predict faster using a kernel function.
+\item
+\begin{align*}
+\theta^{(i+1)}&:=	  \theta^{(i)} + \alpha(y^{(i+1)} - h_{\theta^{(i)}}(\phi(x^{(i+1)})))\phi(x^{(i+1)})\\
+&=\theta^{(i)} + \alpha(y^{(i+1)} -g(\theta^{(i)^T}\phi(x^{(i+1)})))\phi(x^{(i+1)})\\
+&=\beta^{(i)}\phi(x^{(i+1)}) + \alpha(y^{(i+1)} -g(\beta^{(i)}\phi(x^{(i+1)})^T\phi(x^{(i+1)})))\phi(x^{(i+1)})\\
+&=(\beta^{(i)}+ \alpha(y^{(i+1)} -g(\beta^{(i)}K(x^{(i+1)},x^{(i+1)}))))\phi(x^{(i+1)})\\
+&=\beta^{(i+1)}\phi(x^{(i+1)})
+\end{align*}
+\begin{align*}
+\beta^{(i+1)}&:=\beta^{(i)}+ \alpha(y^{(i+1)} -g(\beta^{(i)}K(x^{(i+1)},x^{(i+1)})))
+\end{align*}
+\end{enumerate}
 \end{answer}
