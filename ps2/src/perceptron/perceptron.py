@@ -80,6 +80,7 @@ def rbf_kernel(a, b, sigma=1):
     scaled_distance = -distance / (2 * (sigma) ** 2)
     return math.exp(scaled_distance)
 
+
 def non_psd_kernel(a, b):
     """An implementation of a non-psd kernel.
 
@@ -87,9 +88,10 @@ def non_psd_kernel(a, b):
         a: A vector
         b: A vector
     """
-    if(np.allclose(a,b,rtol=1e-5)):
+    if (np.allclose(a, b, rtol=1e-5)):
         return -1
     return 0
+
 
 def train_perceptron(kernel_name, kernel, learning_rate):
     """Train a perceptron with the given kernel.
@@ -128,7 +130,6 @@ def main():
     train_perceptron('rbf', rbf_kernel, 0.5)
     train_perceptron('non_psd', non_psd_kernel, 0.5)
     plt.show()
-
 
 
 if __name__ == "__main__":
