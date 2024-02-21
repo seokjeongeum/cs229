@@ -1,8 +1,8 @@
 \begin{answer}
   \begin{align*}
-\ell(\phi, \mu_{0}, \mu_1, \Sigma) &=& \log \prod_{i=1}^\nexp p(x^{(i)} , y^{(i)};\phi, \mu_{0}, \mu_1, \Sigma) \\
-&=& \log \prod_{i=1}^\nexp p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) p(y^{(i)};\phi) \\
-&=& \sum_{i=1}^\nexp \log \left( p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) \right) + \sum_{i=1}^\nexp \log\left( p(y^{(i)};\phi)\right)
+\ell(\phi, \mu_{0}, \mu_1, \Sigma) &= \log \prod_{i=1}^\nexp p(x^{(i)} , y^{(i)};\phi, \mu_{0}, \mu_1, \Sigma) \\
+&= \log \prod_{i=1}^\nexp p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) p(y^{(i)};\phi) \\
+&= \sum_{i=1}^\nexp \log \left( p(x^{(i)} | y^{(i)}; \mu_{0}, \mu_1, \Sigma) \right) + \sum_{i=1}^\nexp \log\left( p(y^{(i)};\phi)\right)
   \end{align*}
   \begin{align*}
 \frac{\partial\ell}{\partial\phi}&=\frac{\partial}{\partial\phi}\sum_{i=1}^\nexp \log \left( p(y^{(i)};\phi)\right)\\

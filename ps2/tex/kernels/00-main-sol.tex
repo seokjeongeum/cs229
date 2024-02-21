@@ -1,7 +1,7 @@
 \begin{answer}
 \begin{enumerate}
 \item 
-Is a kernel, because:
+Is a kernel because:
 \begin{align*}
 \textbf{y}^TK\textbf{y}&=\textbf{y}^T(K_1+K_2)\textbf{y}\\
 &=\textbf{y}^TK_1\textbf{y}+\textbf{y}^TK_2\textbf{y}
@@ -26,10 +26,10 @@ K=
    \begin{bmatrix} 
    -1&0\\ 
    0&-1\\ 
-   \end{bmatrix} \text{Which is not positive semidefinite}
+   \end{bmatrix} \text{Which is not positive semidefinite.}
 \end{align*}
 \item 
-Is a kernel, because:
+Is a kernel because:
 \begin{align*}
 \textbf{y}^TK\textbf{y}&=\textbf{y}^TaK_1\textbf{y}\\
 &=a\textbf{y}^TK_1\textbf{y}
@@ -38,7 +38,7 @@ Is a kernel, because:
 \textbf{y}^TK_1\textbf{y}\geq0\Rightarrow\textbf{y}^TK\textbf{y}=a\textbf{y}^TK_1\textbf{y}\geq0
 \end{align*}
 \item 
-Not a kernel, because:
+Not a kernel because:
 \begin{align*}
 \textbf{y}^TK\textbf{y}&=\textbf{y}^T-aK_1\textbf{y}\\
 &=-a\textbf{y}^TK_1\textbf{y}
@@ -47,8 +47,36 @@ Not a kernel, because:
 \textbf{y}^TK_1\textbf{y}\geq0\Rightarrow\textbf{y}^TK\textbf{y}=-a\textbf{y}^TK_1\textbf{y}\leq0
 \end{align*}
 \item 
+Is a kernel because:\\
+If we call $K_2^\frac{1}{2}$ the symmetric matrix such that $K_2^\frac{1}{2}$$K_2^\frac{1}{2}$=$K_2$
+\begin{align*}
+K=K_1K_2=K_1K_2^\frac{1}{2}K_2^\frac{1}{2}=K_2^{-\frac{1}{2}}K_2^\frac{1}{2}K_1K_2^\frac{1}{2}K_2^\frac{1}{2}
+\end{align*} 
+Which is similar to
+\begin{align*}
+K_2^\frac{1}{2}K_1K_2^\frac{1}{2} 
+\end{align*}
+Which is positive semidefinite.
 \item 
+Not a kernel, counter-example:
+\begin{align*}
+f(v)=v_0,x=
+   \begin{bmatrix} 
+   1\\ 
+   \vdots\\ 
+   \end{bmatrix},z=
+   \begin{bmatrix} 
+   -1\\ 
+   \vdots\\
+   \end{bmatrix}\Rightarrow K=f(x)f(z)=-1
+\end{align*}
+\begin{align*}
+\textbf{y}^TK\textbf{y}&=-\textbf{y}^T\textbf{y}\\
+&=-\sum_{i=1}^n y_i^2\leq0
+\end{align*}
 \item 
+Is a kernel because $K_3$ is a kernel.
 \item 
+Is a kernel because every term is a product of a kernel which is positive semidefinite.
 \end{enumerate}
 \end{answer}
