@@ -1,4 +1,16 @@
 \begin{answer}
+\begin{align*}
+\nabla_{z^{(i)}} \mathrm{CE}(y^{(i)}, \hat{y}^{(i)})&=\nabla_{z^{(i)}}- \sum_{k=1}^K y_k^{(i)} \log \hat{y_k}^{(i)}\\
+&=\nabla_{z^{(i)}}\left(- \sum_{k=1,k\neq l}^K y_k^{(i)} \log \hat{y_k}^{(i)}-y_l^{(i)} \log \hat{y_l}^{(i)}\right)\\
+&=\nabla_{z^{(i)}}\left(-\log \hat{y_l}^{(i)}\right)\\
+&=\nabla_{z^{(i)}}\left(-\log(\mathrm{softmax}(z_l^{(i)}))\right)\\
+&=\nabla_{z^{(i)}}\left(-\log\left(\frac{e^{z_l^{(i)}}}{\sum_{k=1}^{K}e^{z_k^{(i)}}}\right)\right)\\
+&=\nabla_{z^{(i)}}\left(-\log\left(\frac{e^{z_l^{(i)}}}{\vec{1}^Te^{z^{(i)}}}\right)\right)\\
+&=\frac{\vec{1}^Te^{z^{(i)}}}{e^{z_l^{(i)}}}\cdot\frac{e^{z^{(i)}}e^{z_l^{(i)}}}{(\vec{1}^Te^{z^{(i)}})^2}\\
+&=\frac{e^{z^{(i)}}}{\vec{1}^Te^{z^{(i)}}}\\
+&=\frac{e^{z^{(i)}}}{\sum_{k=1}^{K}e^{z_k^{(i)}}}\\
+&=\hat{y}^{(i)}??
+\end{align*}
 \end{answer}
    
   
