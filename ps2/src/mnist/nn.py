@@ -23,7 +23,7 @@ def softmax(x):
     """
     # *** START CODE HERE ***
     x_exp = np.exp(x - np.max(x, axis=1, keepdims=True))
-    return x_exp / np.sum(x_exp)
+    return x_exp / np.sum(x_exp, axis=1, keepdims=True)
     # *** END CODE HERE ***
 
 
@@ -260,7 +260,7 @@ def read_data(images_file, labels_file):
 def run_train_test(name, all_data, all_labels, backward_prop_func, num_epochs, plot=True):
     params, cost_train, cost_dev, accuracy_train, accuracy_dev = nn_train(
         all_data['train'], all_labels['train'],
-        all_data['dev'], all_labels['dev'],
+        all_data['test'], all_labels['test'],
         get_initial_params, forward_prop, backward_prop_func,
         num_hidden=300, learning_rate=5, num_epochs=num_epochs, batch_size=1000
     )
